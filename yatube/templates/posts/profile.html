@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title> Профайл пользователя {{author.get_full_name}} </title>
+{% endblock %}
+{% block content %}
+<h1>Все посты пользователя {{ author.get_full_name }} </h1>
+<h3>Всего постов: {{ author.posts.count }} </h3>
+<article>
+{% for post in page_obj %}
+    {% include 'includes/post3.html' %}
+    {% endfor %}
+</article>
+<hr>
+{% endblock %}

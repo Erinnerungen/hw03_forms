@@ -1,0 +1,13 @@
+<article>
+    <ul>
+      <li>
+        Дата публикации: {{ post.pub_date|date:"d E Y" }}
+      </li>
+    </ul>
+    <p>{{ post.text|linebreaksbr }}</p>
+    {% if post.group %}
+    <p><a href="{% url 'posts:post_detail' post.pk %}">подробная информация </a><br>
+    <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a></p>
+    {% endif %}
+    {% if not forloop.last %}<hr>{% endif %}
+</article>
