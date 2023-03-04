@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+
 from .models import Post
 
 
@@ -10,4 +11,3 @@ class PostForm(ModelForm):
             'group': 'Группа',
             'text': 'Текст поста'
         }
-

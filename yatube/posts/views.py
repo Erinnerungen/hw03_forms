@@ -1,10 +1,10 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, Group, User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from .forms import PostForm
-from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404, redirect, render
 
+from .forms import PostForm
+from .models import Group, Post, User
 
 POSTS_NUM = 10
 POST = 1
@@ -51,7 +51,7 @@ def profile(request, username):
         'page_obj': page_obj,
         'author': author,
         'posts': posts,
-        }
+    }
     return render(request, 'posts/profile.html', context)
 
 
