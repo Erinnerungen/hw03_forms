@@ -20,6 +20,9 @@
             {% endif %}
           </div>
           <div class="card-body">
+            {% if form.errors %}
+              {% include 'includes/error.html' %}
+            {% endif %}
             {% if is_edit %}
                 <form action="{% url 'posts:post_edit' post_id %}"
                   method="post" enctype="multipart/form-data">
@@ -28,11 +31,9 @@
                   method="post" enctype="multipart/form-data">
                   {% endif %}
               {% csrf_token %}
-              <div class="form-group row my-3 p-3">
-                <label for="id_text">
-                  Текст поста
-                  <span class="required text-danger" >*</span>
-                </label>
+                  {% for field in form %}
+                    {% include 'includes/fields.html' %}
+                  {% endfor %}
                 <textarea name="text" cols="40" rows="10" class="form-control" required id="id_text" {{ form.text }}>
                 </textarea>
 
