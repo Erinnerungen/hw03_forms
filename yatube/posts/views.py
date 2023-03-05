@@ -13,11 +13,15 @@ SYMBOLS = 30
 User = get_user_model()
 
 
-def index(request):
-    post_list = Post.objects.all()
+def paginatorfunc(request, post_list):
     paginator = Paginator(post_list, POSTS_NUM)
     page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    return paginator.get_page(page_number)
+
+
+def index(request):
+    post_list = Post.objects.all()
+    page_obj = paginatorfunc(request, post_list)
     context = {
         'page_obj': page_obj
     }
@@ -28,10 +32,7 @@ def group_posts(request, slug=None):
     group = get_object_or_404(Group, slug=slug)
     posts = group.posts.all()[:POSTS_NUM]
     post_list = group.posts.all()
-    paginator = Paginator(post_list, POSTS_NUM)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
+    page_obj = paginatorfunc(request, post_list)
     context = {
         'page_obj': page_obj,
         'group': group,
@@ -42,16 +43,16 @@ def group_posts(request, slug=None):
 
 def profile(request, username):
     author = get_object_or_404(User, username=username)
-    posts = Post.objects.\
-        select_related('group').filter(author__username=username)
+    post_list = Post.objects.select_related(
+        'group').filter(
+        author__username=username
+    )
 
-    paginator = Paginator(posts, POSTS_NUM)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    page_obj = paginatorfunc(request, post_list)
     context = {
         'page_obj': page_obj,
         'author': author,
-        'posts': posts,
+        'post_list': post_list,
     }
     return render(request, 'posts/profile.html', context)
 

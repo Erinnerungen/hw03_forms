@@ -9,5 +9,9 @@ class PostForm(ModelForm):
         fields = ('text', 'group')
         labels = {
             'group': 'Группа',
-            'text': 'Текст поста'
+            'text': 'Текст поста',
+        }
+        help_texts = {
+            'group': 'Выберите группу из предложенных',
+            'text': 'Впишите текст поста в поле',
         }
