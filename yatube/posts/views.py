@@ -23,7 +23,8 @@ def index(request):
     post_list = Post.objects.all()
     page_obj = paginatorfunc(request, post_list)
     context = {
-        'page_obj': page_obj
+        'page_obj': page_obj,
+        'title': 'Последние обновления на сайте',
     }
     return render(request, 'posts/index.html', context)
 
@@ -61,8 +62,6 @@ def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post_id = Post.objects.filter(author__posts=post_id)
     context = {
-        'post_id': post_id,
-        'author': post.author,
         'post': post,
     }
     return render(request, 'posts/post_detail.html', context)
