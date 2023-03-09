@@ -23,7 +23,7 @@ class PostModelTest(TestCase):
 
     def test_models_have_correct_object_names(self):
         text = PostModelTest.post
-        expected_text = text.title
+        expected_text = text.text
         group = PostModelTest.group
         expected_group = group.title
         self.assertEqual(expected_text, str(text))

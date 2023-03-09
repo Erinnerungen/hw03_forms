@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 
 
-class StatisURLTests(TestCase):
+class StatusURLTests(TestCase):
     def test_homepage(self):
         guest_client = Client()
         response = guest_client.get('/')
