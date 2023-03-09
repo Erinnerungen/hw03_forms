@@ -3,12 +3,6 @@
 Создание поста
 {% endblock %}
 
-{% if is_edit %}
-  Редактировать запись
-{% else %}
-  Добавить запись
-{% endif %}
-
 {% load user_filters %}
 {% block content %}
   <div class="container py-5">
@@ -28,15 +22,17 @@
             {% endif %}
             {% if is_edit %}
             <form action="{% url 'posts:post_edit' post_id %}"
-                  method="post" enctype="multipart/form-data"></form>
+                  method="post" enctype="multipart/form-data">
             {% else %}
             <form action="{% url 'posts:post_create' %}"
-                  method="post" enctype="multipart/form-data"></form>
+                  method="post" enctype="multipart/form-data">
             {% endif %}
             {% csrf_token %}
-            {% for field in form %}
-              {% include 'includes/fields.html' %}
-            {% endfor %}
+            <div class="form-group row my-3 p-3">
+              <label for="id_text">
+                Текст поста
+                <span class="required text-danger">*</span>
+              </label>
             <textarea name="text" cols="40" rows="10"
                       class="form-control" required id="id_text" {{ form.text }}>
             </textarea>
