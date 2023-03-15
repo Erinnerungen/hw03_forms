@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'yatube.wsgi.yatube'
+WSGI_APPLICATION = 'yatube.wsgi.application'
 
 
 # Database

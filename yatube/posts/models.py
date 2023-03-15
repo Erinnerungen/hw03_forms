@@ -6,6 +6,7 @@ SYMBOLS = 15
 
 
 class Post(models.Model):
+    objects = None
     text = models.TextField(
         'Текст поста',
         help_text='Введите текст поста'

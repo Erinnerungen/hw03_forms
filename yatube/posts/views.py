@@ -16,7 +16,8 @@ User = get_user_model()
 def paginatorfunc(request, post_list):
     paginator = Paginator(post_list, POSTS_NUM)
     page_number = request.GET.get('page')
-    return paginator.get_page(page_number)
+    page_obj = paginator.get_page(page_number)
+    return page_obj
 
 
 def index(request):
@@ -63,6 +64,7 @@ def post_detail(request, post_id):
     post_id = Post.objects.filter(author__posts=post_id)
     context = {
         'post': post,
+        'post_id': post_id,
     }
     return render(request, 'posts/post_detail.html', context)
 
